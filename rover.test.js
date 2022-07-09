@@ -1,6 +1,6 @@
 const { describe, test } = require("@jest/globals");
 const { expect } = require("expect");
-const { parseInput } = require("./rover");
+const { parseInput, processInstructions } = require("./rover");
 
 const TEST_INPUT_1 = `4 8
 (2, 3, E) LFRFF
@@ -27,6 +27,33 @@ describe("parses input correctly", () => {
       y: 2,
       direction: "N",
       instructions: "FFLFRFF",
+    });
+  });
+});
+
+describe("processes instructions correctly", () => {
+  const grid = { width: 10, height: 10 };
+
+  describe("valid moves", () => {
+    test("move north", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "F" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 5, direction: "N", lost: false });
+    });
+    test("move east", () => {
+      const rover = { x: 4, y: 4, direction: "E", instructions: "F" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 5, y: 4, direction: "E", lost: false });
+    });
+    test("move south", () => {
+      const rover = { x: 4, y: 4, direction: "S", instructions: "F" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 3, direction: "S", lost: false });
+    });
+    test("move west", () => {
+      const rover = { x: 4, y: 4, direction: "W", instructions: "F" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 3, y: 4, direction: "W", lost: false });
     });
   });
 });
