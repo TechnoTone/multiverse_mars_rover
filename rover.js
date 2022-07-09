@@ -15,7 +15,6 @@ function parseRovers(inputs) {
 }
 
 function parseRover(input) {
-  console.log({ input });
   partsRegex = /^\((\d+), (\d+), ([NESW])\) ([FLR]*)/;
   const parts = partsRegex.exec(input);
   const [x, y] = parts.slice(1, 3).map(Number);
