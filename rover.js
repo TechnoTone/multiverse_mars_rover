@@ -21,7 +21,8 @@ function parseRover(input) {
   const [x, y] = parts.slice(1, 3).map(Number);
   const [direction, instructions] = parts.slice(3);
   return {
-    position: { x, y },
+    x,
+    y,
     direction,
     instructions,
   };

@@ -17,12 +17,14 @@ describe("parses input correctly", () => {
   test("parses rover inputs", () => {
     expect(result.rovers).toHaveLength(2);
     expect(result.rovers[0]).toMatchObject({
-      position: { x: 2, y: 3 },
+      x: 2,
+      y: 3,
       direction: "E",
       instructions: "LFRFF",
     });
     expect(result.rovers[1]).toMatchObject({
-      position: { x: 0, y: 2 },
+      x: 0,
+      y: 2,
       direction: "N",
       instructions: "FFLFRFF",
     });
