@@ -27,10 +27,4 @@ describe("parses input correctly", () => {
       instructions: "FFLFRFF",
     });
   });
-
-  test("all rovers start as not lost", () => {
-    result.rovers.forEach((rover) => {
-      expect(rover.lost).toBeFalsy();
-    });
-  });
 });

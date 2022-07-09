@@ -24,6 +24,5 @@ function parseRover(input) {
     position: { x, y },
     direction,
     instructions,
-    lost: false,
   };
 }
