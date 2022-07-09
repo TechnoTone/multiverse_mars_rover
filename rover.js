@@ -40,6 +40,12 @@ module.exports.processInstructions = function (rover, grid) {
             break;
         }
         break;
+      case "R":
+        direction = TURN_RIGHT[direction];
+        break;
+      case "L":
+        direction = TURN_LEFT[direction];
+        break;
       default:
         throw new Error(`Unknown instruction: ${instruction}`);
     }
@@ -47,6 +53,9 @@ module.exports.processInstructions = function (rover, grid) {
 
   return { x, y, direction, lost: false };
 };
+
+const TURN_RIGHT = { N: "E", E: "S", S: "W", W: "N" };
+const TURN_LEFT = { N: "W", E: "N", S: "E", W: "S" };
 
 function parseGrid(input) {
   const values = input.split(" ").map(Number);

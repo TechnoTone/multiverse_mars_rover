@@ -79,4 +79,47 @@ describe("processes instructions correctly", () => {
       expect(result).toStrictEqual({ x: 0, y: 4, direction: "W", lost: true });
     });
   });
+
+  describe("turns", () => {
+    test("turn left", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "L" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "W", lost: false });
+    });
+    test("turn right", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "R" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "E", lost: false });
+    });
+    test("turn left twice", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "LL" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "S", lost: false });
+    });
+    test("turn right twice", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "RR" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "S", lost: false });
+    });
+    test("turn left three times", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "LLL" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "E", lost: false });
+    });
+    test("turn right three times", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "RRR" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "W", lost: false });
+    });
+    test("turn left four times", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "LLLL" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "N", lost: false });
+    });
+    test("turn right four times", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "RRRR" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 4, direction: "N", lost: false });
+    });
+  });
 });
