@@ -36,6 +36,20 @@ The output should take the form:
 
 Each line represents the final position and orientation of the robots of the form (x, y, orientation) and optionally whether the robot was lost.
 
+Another example for the input:
+
+```
+4 8
+(2, 3, N) FLLFR
+(1, 0, S) FFRLF
+```
+
+The output would be:
+
+```
+(2, 3, W)
+(1, 0, S) LOST
+```
 
 ## Questions/observations
 
