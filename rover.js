@@ -12,16 +12,16 @@ module.exports.processInstructions = function (rover, grid) {
 
   for (const instruction of instructions) {
     switch (instruction) {
-      case "F": // MOVE FORWARD
+      case "F": 
         switch (direction) {
           case "N":
-            if (y >= height - 1) {
+            if (y >= height ) {
               return { x, y, direction, lost: true };
             }
             y++;
             break;
           case "E":
-            if (x >= width - 1) {
+            if (x >= width ) {
               return { x, y, direction, lost: true };
             }
             x++;
@@ -43,7 +43,7 @@ module.exports.processInstructions = function (rover, grid) {
       case "R":
         direction = TURN_RIGHT[direction];
         break;
-      case "L":
+      case "L": 
         direction = TURN_LEFT[direction];
         break;
       default:
@@ -53,6 +53,14 @@ module.exports.processInstructions = function (rover, grid) {
 
   return { x, y, direction, lost: false };
 };
+
+module.exports.processRovers = function ({ grid, rovers }) {
+  return rovers.map((rover) => module.exports.processInstructions(rover, grid));
+};
+
+module.exports.formatResults = function (results) {
+  return results.map(formatResult).join("\n");
+}
 
 const TURN_RIGHT = { N: "E", E: "S", S: "W", W: "N" };
 const TURN_LEFT = { N: "W", E: "N", S: "E", W: "S" };
@@ -78,3 +86,8 @@ function parseRover(input) {
     instructions,
   };
 }
+
+function formatResult(result) {
+  const { x, y, direction, lost } = result;
+  return `(${x}, ${y}, ${direction})${lost ? " LOST" : ""}`;
+};

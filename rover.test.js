@@ -1,10 +1,25 @@
 const { describe, test } = require("@jest/globals");
 const { expect } = require("expect");
-const { parseInput, processInstructions } = require("./rover");
+const {
+  parseInput,
+  processInstructions,
+  processRovers,
+  formatResults,
+} = require("./rover");
 
 const TEST_INPUT_1 = `4 8
 (2, 3, E) LFRFF
 (0, 2, N) FFLFRFF`;
+
+const EXPECTED_RESULTS_1 = `(4, 4, E)
+(0, 4, W) LOST`;
+
+const TEST_INPUT_2 = ` 4 8
+(2, 3, N) FLLFR
+(1, 0, S) FFRLF`;
+
+const EXPECTED_RESULTS_2 = `(2, 3, W)
+(1, 0, S) LOST`;
 
 describe("parses input correctly", () => {
   const result = parseInput(TEST_INPUT_1);
@@ -59,24 +74,24 @@ describe("processes instructions correctly", () => {
 
   describe("invalid moves", () => {
     test("move north", () => {
-      const rover = { x: 4, y: 4, direction: "N", instructions: "FFFFFF" };
+      const rover = { x: 5, y: 5, direction: "N", instructions: "FFFFFF" };
       const result = processInstructions(rover, grid);
-      expect(result).toStrictEqual({ x: 4, y: 9, direction: "N", lost: true });
+      expect(result).toStrictEqual({ x: 5, y: 10, direction: "N", lost: true });
     });
     test("move east", () => {
-      const rover = { x: 4, y: 4, direction: "E", instructions: "FFFFFF" };
+      const rover = { x: 5, y: 5, direction: "E", instructions: "FFFFFF" };
       const result = processInstructions(rover, grid);
-      expect(result).toStrictEqual({ x: 9, y: 4, direction: "E", lost: true });
+      expect(result).toStrictEqual({ x: 10, y: 5, direction: "E", lost: true });
     });
     test("move south", () => {
-      const rover = { x: 4, y: 4, direction: "S", instructions: "FFFFF" };
+      const rover = { x: 5, y: 5, direction: "S", instructions: "FFFFFF" };
       const result = processInstructions(rover, grid);
-      expect(result).toStrictEqual({ x: 4, y: 0, direction: "S", lost: true });
+      expect(result).toStrictEqual({ x: 5, y: 0, direction: "S", lost: true });
     });
     test("move west", () => {
-      const rover = { x: 4, y: 4, direction: "W", instructions: "FFFFF" };
+      const rover = { x: 5, y: 5, direction: "W", instructions: "FFFFFF" };
       const result = processInstructions(rover, grid);
-      expect(result).toStrictEqual({ x: 0, y: 4, direction: "W", lost: true });
+      expect(result).toStrictEqual({ x: 0, y: 5, direction: "W", lost: true });
     });
   });
 
@@ -121,5 +136,22 @@ describe("processes instructions correctly", () => {
       const result = processInstructions(rover, grid);
       expect(result).toStrictEqual({ x: 4, y: 4, direction: "N", lost: false });
     });
+  });
+});
+
+describe("test cases", () => {
+  test("test case 1", () => {
+    const parsed = parseInput(TEST_INPUT_1);
+    const results = processRovers(parsed);
+    const formattedResults = formatResults(results);
+
+    expect(formattedResults).toBe(EXPECTED_RESULTS_1);
+  });
+  test("test case 2", () => {
+    const parsed = parseInput(TEST_INPUT_2);
+    const results = processRovers(parsed);
+    const formattedResults = formatResults(results);
+
+    expect(formattedResults).toBe(EXPECTED_RESULTS_2);
   });
 });

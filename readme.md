@@ -59,3 +59,6 @@ The output would be:
 
 - For simplicity I will be assuming the simpler of these two options. There's no point adding complexity at this stage without feeding back this questions and confirming the requirements. It will be easy to adapt the solution and add the additional complexity later if this is required.
 
+- The instructions say that the first values are the size of the grid (m and n). The instructions also say that the coordinate for the rovers is a 0-bound index position (the bottom-left position is x:0, y,0). These two facts imply that a grid with width of m, the maximum allowed x value would be m-1, and the same would apply to the height (maximum y value of n-1). However, when following these rules for the first example the first rover moves out of bounds by attempting to move East from 3 to 4. 
+
+  - I will make the assumption that the test cases are correct and adjust my solution to match. This means interpreting m and n as maximum x and y values instead of as width and hight measurements.
