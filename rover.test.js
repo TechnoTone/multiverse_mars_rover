@@ -56,4 +56,27 @@ describe("processes instructions correctly", () => {
       expect(result).toStrictEqual({ x: 3, y: 4, direction: "W", lost: false });
     });
   });
+
+  describe("invalid moves", () => {
+    test("move north", () => {
+      const rover = { x: 4, y: 4, direction: "N", instructions: "FFFFFF" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 9, direction: "N", lost: true });
+    });
+    test("move east", () => {
+      const rover = { x: 4, y: 4, direction: "E", instructions: "FFFFFF" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 9, y: 4, direction: "E", lost: true });
+    });
+    test("move south", () => {
+      const rover = { x: 4, y: 4, direction: "S", instructions: "FFFFF" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 4, y: 0, direction: "S", lost: true });
+    });
+    test("move west", () => {
+      const rover = { x: 4, y: 4, direction: "W", instructions: "FFFFF" };
+      const result = processInstructions(rover, grid);
+      expect(result).toStrictEqual({ x: 0, y: 4, direction: "W", lost: true });
+    });
+  });
 });

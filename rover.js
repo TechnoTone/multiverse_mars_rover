@@ -15,15 +15,27 @@ module.exports.processInstructions = function (rover, grid) {
       case "F": // MOVE FORWARD
         switch (direction) {
           case "N":
+            if (y >= height - 1) {
+              return { x, y, direction, lost: true };
+            }
             y++;
             break;
           case "E":
+            if (x >= width - 1) {
+              return { x, y, direction, lost: true };
+            }
             x++;
             break;
           case "S":
+            if (y <= 0) {
+              return { x, y, direction, lost: true };
+            }
             y--;
             break;
           case "W":
+            if (x <= 0) {
+              return { x, y, direction, lost: true };
+            }
             x--;
             break;
         }
